@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="Omnipro_QuickProductPositioning::main_menu"
+             title="Omnipro"
+             module="Omnipro_QuickProductPositioning"
+             sortOrder="60"
+             resource="Omnipro_QuickProductPositioning::main_menu" />
+
+        <add id="Omnipro_QuickProductPositioning::category_productPositioning"
+             title="Product Positioning"
+             module="Omnipro_QuickProductPositioning"
+             sortOrder="10"
+             action="omnipro/positioning/index"
+             parent="Omnipro_QuickProductPositioning::main_menu"
+             resource="Omnipro_QuickProductPositioning::category_productPositioning" />
+    </menu>
+</config>
