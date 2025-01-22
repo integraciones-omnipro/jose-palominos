@@ -71,12 +71,6 @@ class FormDataSource extends \Magento\Ui\DataProvider\AbstractDataProvider
         }
 
         $items = $this->collection->getItems();
-
-        $logger = \Magento\Framework\App\ObjectManager::getInstance()->get('\Psr\Log\LoggerInterface');
-        $logger->debug('----  getData  ----');
-        $logger->debug(print_r($this->collection->getMainTable(), true));
-        $logger->debug(print_r($items, true));
-
         foreach ($items as $item) {
             $data = $item->getData();
             $this->loadedData[$item->getId()] = $data;

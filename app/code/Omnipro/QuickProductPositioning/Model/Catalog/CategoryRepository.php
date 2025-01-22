@@ -10,12 +10,30 @@ use Omnipro\QuickProductPositioning\Model\ResourceModel\Positioning\CollectionFa
 
 class CategoryRepository implements CategoryProductLinkRepositoryInterface
 {
+    /** @var ResourceModel */
     private $resource;
+
+    /** @var CategoryFactory */
     private $categoryProductLinkFactory;
+
+    /** @var \Magento\Framework\Api\SearchCriteriaInterface */
     private $searchResultsFactory;
+
+    /** @var CollectionFactory */
     private $collectionFactory;
+
+    /** @var CollectionProcessorInterface */
     private $collectionProcessor;
 
+    /**
+     * Constructor.
+     *
+     * @param ResourceModel $resource
+     * @param CategoryFactory $categoryProductLinkFactory
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchResultsFactory
+     * @param CollectionFactory $collectionFactory
+     * @param CollectionProcessorInterface $collectionProcessor
+     */
     public function __construct(
         ResourceModel $resource,
         CategoryFactory $categoryProductLinkFactory,
@@ -30,6 +48,12 @@ class CategoryRepository implements CategoryProductLinkRepositoryInterface
         $this->collectionProcessor = $collectionProcessor;
     }
 
+    /**
+     * Function to get one record by id.
+     * @param $id
+     * @return Category
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getById($id)
     {
         $categoryProductLink = $this->categoryProductLinkFactory->create();
@@ -42,6 +66,12 @@ class CategoryRepository implements CategoryProductLinkRepositoryInterface
         return $categoryProductLink;
     }
 
+    /**
+     * function to save record.
+     * @param CategoryProductLinkDataInterface $categoryProductLink
+     * @return CategoryProductLinkDataInterface
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     */
 
     public function save(CategoryProductLinkDataInterface $categoryProductLink)
     {
@@ -50,6 +80,8 @@ class CategoryRepository implements CategoryProductLinkRepositoryInterface
     }
 
     /**
+     * Function to delete record.
+     *
      * @throws \Exception
      */
     public function delete(CategoryProductLinkDataInterface $categoryProductLink)
@@ -58,6 +90,12 @@ class CategoryRepository implements CategoryProductLinkRepositoryInterface
         return true;
     }
 
+    /**
+     * Function to get a list of records.
+     *
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
+     * @return \Omnipro\QuickProductPositioning\Api\CategoryProductLinkSearchResultsInterface
+     */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
     {
         $collection = $this->collectionFactory->create();
@@ -71,8 +109,9 @@ class CategoryRepository implements CategoryProductLinkRepositoryInterface
     }
 
     /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * Function to get options for this class.
      *
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return array
      */
     public function toOptionArray(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)

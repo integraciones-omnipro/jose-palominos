@@ -52,9 +52,6 @@ class Edit extends \Magento\Backend\App\Action
         $this->model = $model;
         $this->logger = $logger;
         parent::__construct($context);
-
-        $logger = \Magento\Framework\App\ObjectManager::getInstance()->get('\Psr\Log\LoggerInterface');
-        $logger->debug('++++  Edit Action __construct  ++++');
     }
 
     /**
@@ -72,8 +69,6 @@ class Edit extends \Magento\Backend\App\Action
      */
     protected function _initAction()
     {
-        $logger = \Magento\Framework\App\ObjectManager::getInstance()->get('\Psr\Log\LoggerInterface');
-        $logger->debug('++++  Edit Action _initAction  ++++');
         // load layout and set active menu.
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
@@ -88,19 +83,11 @@ class Edit extends \Magento\Backend\App\Action
      */
     public function execute(): AbstractResult|Page
     {
-        $logger = \Magento\Framework\App\ObjectManager::getInstance()->get('\Psr\Log\LoggerInterface');
-        $logger->debug('++++  Edit Action execute  ++++');
-
         /** \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
 
         try {
             $id = $this->getRequest()->getParam('entity_id');
-
-            $logger->debug($id);
-            $logger->debug(print_r($this->_session->getData(), true));
-            $logger->debug(print_r($this->_session->getFormData(), true));
-
             if ($id) {
                 $this->repository->loadModel($this->model, $id);
                 if (!$this->model->getId()) {
@@ -112,7 +99,7 @@ class Edit extends \Magento\Backend\App\Action
             if (!empty($data = $this->_session->getFormData())) {
                 $this->model
                 ->setCategoryId($data['category_id'] ?? null)
-//                ->setProductId($data['product_id'] ?? null)
+                ->setProductId($data['product_id'] ?? null)
                 ->setPosition($data['position'] ?? null);
             }
 
