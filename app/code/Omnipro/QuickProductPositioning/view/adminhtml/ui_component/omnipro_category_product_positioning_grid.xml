@@ -6,6 +6,20 @@
             <item name="deps" xsi:type="string">omnipro_category_product_positioning_grid.omnipro_product_positioning_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">spinner_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="import" xsi:type="array">
+                <item name="name" xsi:type="string">import</item>
+                <item name="label" xsi:type="string" translate="true">Import Data</item>
+                <item name="class" xsi:type="string">secondary</item>
+                <item name="url" xsi:type="string">*/import/index</item>
+            </item>
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
     </argument>
     <listingToolbar name="listing_top">
         <argument name="data" xsi:type="array">
@@ -29,6 +43,37 @@
             </settings>
         </filters>
         <paging name="listing_paging"/>
+        <exportButton name="export_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="options" xsi:type="array">
+                        <item name="csv" xsi:type="array">
+                            <item name="value" xsi:type="string">csv</item>
+                            <item name="label" xsi:type="string" translate="true">CSV</item>
+                            <item name="url" xsi:type="string">omnipro/category/gridToCsv</item>
+                        </item>
+                        <item name="xml" xsi:type="array">
+                            <item name="value" xsi:type="string">xml</item>
+                            <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                            <item name="url" xsi:type="string">omnipro/category/gridToXml</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </exportButton>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete</title>
+                    </confirm>
+                    <url path="omnipro/category/sort/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
     </listingToolbar>
     <dataSource name="nameOfDataSource">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -52,7 +97,7 @@
             <settings>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>55</resizeDefaultWidth>
-                <indexField>id</indexField>
+                <indexField>entity_id</indexField>
             </settings>
         </selectionsColumn>
         <column name="entity_id">
@@ -101,5 +146,10 @@
                 <visible>true</visible>
             </settings>
         </column>
+        <actionsColumn name="actions" class="Omnipro\QuickProductPositioning\Ui\Component\Routes\Listing\Column\BlockActions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

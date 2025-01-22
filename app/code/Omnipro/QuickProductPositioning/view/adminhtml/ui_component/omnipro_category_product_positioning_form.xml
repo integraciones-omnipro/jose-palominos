@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnipro_category_product_positioning_grid.omnipro_product_positioning_listing_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Route</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+<!--            <button name="save_and_continue" class="Vitro\Routes\Block\Adminhtml\Routes\Edit\SaveAndContinueButton"/>-->
+            <button name="save" class="Omnipro\QuickProductPositioning\Block\Adminhtml\Positioning\Edit\SaveButton"/>
+<!--            <button name="reset" class="Vitro\Routes\Block\Adminhtml\Routes\Edit\ResetButton"/>-->
+<!--            <button name="delete" class="Vitro\Routes\Block\Adminhtml\Routes\Edit\DeleteButton"/>-->
+            <button name="back" class="Omnipro\QuickProductPositioning\Block\Adminhtml\Positioning\Edit\BackButton"/>
+        </buttons>
+        <namespace>omnipro_category_product_positioning_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>omnipro_category_product_positioning_form.omnipro_product_positioning_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="omnipro_product_positioning_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="Omnipro\QuickProductPositioning\Model\Positioning\FormDataSource" name="omnipro_category_product_positioning_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Position</label>
+        </settings>
+        <field name="category_id" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Category Id</label>
+                <dataScope>category_id</dataScope>
+            </settings>
+        </field>
+        <field name="product_id" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Product Id</label>
+                <dataScope>product_id</dataScope>
+            </settings>
+        </field>
+        <field name="position" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Position</label>
+                <dataScope>position</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>
